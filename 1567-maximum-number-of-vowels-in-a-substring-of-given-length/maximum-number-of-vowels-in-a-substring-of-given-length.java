@@ -12,15 +12,17 @@ class Solution {
         int max = 0;
         for (int i=0; i<k; i++) {
             if (set.contains(s.charAt(i)))count++;
-            if (count > max)max = count;
+            max = Math.max(max, count);
+            if (max >= k)return max;
         }
 
         while (end < s.length()-1 && start < s.length()-k) {
+            if (max >= k)return max;
             if (set.contains(s.charAt(start)))count--;
             start++;
             end++;
             if (set.contains(s.charAt(end)))count++;
-            if (count > max)max = count;
+            max = Math.max(max, count);
         }
         return max;
     }
