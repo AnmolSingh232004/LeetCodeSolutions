@@ -11,7 +11,7 @@ class Solution {
             if (max == k)return max;
         }
 
-        while (end < s.length()-1 && start < s.length()-k) {
+        while (end < s.length()-1) {
             if (max == k)return max;
             if (set.contains(s.charAt(start)))count--;
             start++;
