@@ -12,7 +12,7 @@ class Solution {
         int max = 0;
         for (int i=0; i<k; i++) {
             if (set.contains(s.charAt(i)))count++;
-            max = Math.max(max, count);
+            if (count > max)max = count;
         }
 
         while (end < s.length()-1 && start < s.length()-k) {
@@ -20,7 +20,7 @@ class Solution {
             start++;
             end++;
             if (set.contains(s.charAt(end)))count++;
-            max = Math.max(max, count);
+            if (count > max)max = count;
         }
         return max;
     }
