@@ -17,17 +17,20 @@ class Solution {
         }
 
         if (max1 != max2)return false;
-        List<Integer> list1 = new ArrayList<>();
-        List<Integer> list2 = new ArrayList<>();
+
+        Map<Integer, Integer> map3 = new HashMap<>();
         for (Character c : map1.keySet()) {
-            list1.add(map1.get(c));
+            int map1Freq = map1.get(c);
+            map3.put(map1Freq, map3.getOrDefault(map1Freq, 0) + 1);
         }
         for (Character c : map2.keySet()) {
-            list2.add(map2.get(c));
+            int map2Freq = map2.get(c);
+            map3.put(map2Freq, map3.getOrDefault(map2Freq, 0) - 1);
         }
-        Collections.sort(list1);
-        Collections.sort(list2);
-        if (!list1.equals(list2))return false;
+        for (Integer i : map3.keySet()) {
+            if (map3.get(i) != 0)return false;
+        }
+
 
         return true;
     }
