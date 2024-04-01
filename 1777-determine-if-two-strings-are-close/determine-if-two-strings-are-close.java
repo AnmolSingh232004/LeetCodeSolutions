@@ -9,11 +9,12 @@ class Solution {
             map1.put(word1.charAt(i), map1.getOrDefault(word1.charAt(i), 0) + 1);
             map2.put(word2.charAt(i), map2.getOrDefault(word2.charAt(i), 0) + 1);
         }
+        // checks if both atleast have same letters 
         for (int i=0; i<word2.length(); i++) {
             if (!map1.containsKey(word2.charAt(i)) || !map2.containsKey(word1.charAt(i)))
             return false;
         }
-
+        
         Map<Integer, Integer> map3 = new HashMap<>();
         for (Character c : map1.keySet()) {
             int map1Freq = map1.get(c);
