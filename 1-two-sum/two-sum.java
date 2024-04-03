@@ -7,7 +7,8 @@ class Solution {
             map.put(nums[i], i);
         }
         for (int i=0; i<nums.length; i++) {
-            if (map.containsKey(target - nums[i]) && map.get(target - nums[i]) != i)return new int[]{i, map.get(target - nums[i])};
+            int complement = target - nums[i];
+            if (map.containsKey(complement) && map.get(complement) != i)return new int[]{i, map.get(complement)};
         }
         return new int[]{69, 69};
     }
