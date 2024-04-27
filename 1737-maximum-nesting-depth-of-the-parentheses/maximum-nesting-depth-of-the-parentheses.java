@@ -8,13 +8,11 @@ class Solution {
 
             if (s.charAt(i) == '(') {
             stack.push(s.charAt(i));
-            localLen++;
-            maxLen = Math.max(localLen, maxLen);
+            maxLen = Math.max(stack.size(), maxLen);
             }
 
             if (!stack.isEmpty() && s.charAt(i) == ')') {
                 stack.pop();
-                localLen--;
             }
 
         }
