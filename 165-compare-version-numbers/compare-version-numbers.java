@@ -24,6 +24,7 @@ class Solution {
                 sb2 = new StringBuilder();
             }
         }
+        
         int p1 = 0;
         int p2 = 0;
         while (p1 < list1.size() && p2 < list2.size()) {
