@@ -3,26 +3,26 @@ class Solution {
 
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
+
         StringBuilder sb1 = new StringBuilder();
+        
         for (int i=0; i<version1.length(); i++) {
             if (version1.charAt(i) != '.')sb1.append(version1.charAt(i));
             
-            if (version1.charAt(i) == '.') {
+            if (version1.charAt(i) == '.' || i == version1.length() - 1) {
                 list1.add(Integer.parseInt(sb1.toString()));
                 sb1 = new StringBuilder();
             }
-            if (i == version1.length() - 1)list1.add(Integer.parseInt(sb1.toString()));
         }
 
         StringBuilder sb2 = new StringBuilder();
         for (int i=0; i<version2.length(); i++) {
             if (version2.charAt(i) != '.')sb2.append(version2.charAt(i));
 
-            if (version2.charAt(i) == '.') {
+            if (version2.charAt(i) == '.' || i == version2.length() - 1) {
                 list2.add(Integer.parseInt(sb2.toString()));
                 sb2 = new StringBuilder();
             }
-            if (i == version2.length() - 1)list2.add(Integer.parseInt(sb2.toString()));
         }
         int p1 = 0;
         int p2 = 0;
