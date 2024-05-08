@@ -8,8 +8,8 @@ class Solution {
         while (p1 <= p2) {
             if (people[p1] + people[p2] <= limit) { 
                 p2--;
-            p1++;
-            min++;
+                p1++;
+                min++;
             } 
             else if (people[p2] <= limit && p2 >= 0) {
                 p2--;
