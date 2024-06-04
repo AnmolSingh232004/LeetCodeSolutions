@@ -13,7 +13,6 @@ class Solution {
         for (Character c : map.keySet()) {
             if (map.get(c) == 1)return res+1;
         }
-        if (res % 2 == 0)return res;
-        return res - 2;
+        return res;
     }
 }
