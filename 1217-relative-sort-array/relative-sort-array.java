@@ -17,13 +17,19 @@ class Solution {
             }
             j++;
         }
-        Arrays.sort(arr1);
-        for (int p=0; p<arr1.length; p++) {
-            while (map.get(arr1[p]) >= 1) {
-                res[i] = arr1[p];
-                map.put(arr1[p], map.get(arr1[p]) - 1);
-                i++;
+        List<Integer> list = new ArrayList<>();
+        for (Integer s : map.keySet()) {
+            while (map.get(s) >= 1) {
+            list.add(s);
+            map.put(s, map.get(s) - 1);
             }
+        }
+        Collections.sort(list);
+
+        int k = 0;
+        for (int p=i; p<res.length; p++) {
+            res[p] = list.get(k);
+            k++;
         }
 
         return res;
