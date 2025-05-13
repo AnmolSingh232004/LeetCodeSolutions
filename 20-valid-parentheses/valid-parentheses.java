@@ -7,7 +7,7 @@ class Solution {
         for (int i=0; i<s.length(); i++) {
             char cc = s.charAt(i);
             if (cc == '(' || cc == '{' || cc == '[') {
-                stack.push(cc);
+                stack.push(s.charAt(i));
             } else if(cc == ')') {
                 if (stack.size() > 0 && stack.peek() == '(')stack.pop();
                 else return false;
