@@ -14,33 +14,22 @@
  * }
  */
 class Solution {
-    public boolean isBalanced(TreeNode root){
-        int [] x = logic(root);
-        if (x[1] == 1)return true;
-        else return false;
-        }
 
-    // int[0] == height
-    // int[1] == if balanced or not (boolean)
+        boolean ans = true;
 
-    // 1 == true, -1 == false
+    public boolean isBalanced(TreeNode root) {
+        bal(root);
+        return ans;
+    }
 
-    public int[] logic(TreeNode root) {
-        if (root == null) return new int[]{0, 1}; //signifying tree is 0 height but balanced
+    public int bal(TreeNode root) {
+        if (root == null) return 0;
 
-        int[] res = new int[2];
-        int[] left = logic(root.left); //0,1 // 1,1
-        int[] right = logic(root.right); //0,1 //0,1
+        int left = bal(root.left);
+        int right = bal(root.right);
 
-        int height = Math.max(left[0], right[0]) + 1; // + 1 to account for the node currently in stack
-        res[0] = height;
+        if (Math.abs(left - right) > 1)ans = false;
 
-        // Math.abs(left[0] - right[0]) is difference in height
-
-        if (Math.abs(left[0] - right[0]) <= 1 && left[1] == 1 && right[1] == 1)
-        res[1] = 1;
-        else res[1] = 0;
-
-        return res;
+        return 1 + Math.max(left, right);
     }
 }
