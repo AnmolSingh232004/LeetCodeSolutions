@@ -1,39 +1,35 @@
 class Solution {
     public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
-
-        // 1 = grumpy, 0 = fine
         int happy = 0;
 
-
-        for (int i=0; i<customers.length; i++) {
-            // if (grumpy[i] == 0)grumpyCount--;
+        for (int i=0; i<customers.length; i++) { // calculates how many customers he can satisfy without ability
             if (grumpy[i] == 0)happy += customers[i];
         }
 
+        int lo = 0; //window start
+        int hi = minutes; //window end
 
-        int lo = 0;
-        int hi = minutes;
+        int winVal = 0; //Win value for the static vindow
 
-        int winSize = 0; // 2
-
-        for (int i=0; i<minutes; i++) {
-            if (i < customers.length && grumpy[i] == 1)winSize += customers[i];
+        for (int i=0; i<minutes; i++) { //calculating winVal for initial window which will be of size -> minutes
+            if (i < customers.length && grumpy[i] == 1)winVal += customers[i];
         }
         
-        int winMax = 0;
+        int winMax = 0; //largest winVal
 
         while (lo < customers.length || hi < customers.length) {
-            if (winSize > winMax) {
-                winMax = Math.max(winMax, winSize);
+            if (winVal > winMax) { // if local winVal is larger than winMax
+                winMax = Math.max(winMax, winVal);
             } 
-            if (lo < customers.length && grumpy[lo] == 1) {
-                winSize = Math.abs(winSize -customers[lo]);
+            // operations of removing or adding value only happens when old man is grumpy
+            if (lo < customers.length && grumpy[lo] == 1) { // reduce window from left and remove value
+                winVal = winVal - customers[lo];
             }
-            lo++;
-            if (hi < customers.length && grumpy[hi] == 1) {
-                winSize = winSize + customers[hi];
+            lo++; //shrink the window
+            if (hi < customers.length && grumpy[hi] == 1) { //add value from right if grandpa is grumpy for that value
+                winVal = winVal + customers[hi];
             }
-            hi++;
+            hi++; //expand the window
             
         }
 
