@@ -9,13 +9,10 @@ class Solution {
             int area = (hi-low) * Math.min(height[low], height[hi]);
             max = Math.max(max, area);
             
-            if (height[low] < height[hi]) {
+            if (height[low] <= height[hi]) {
                 low++;
             } else if (height[low] > height[hi]) {
                 hi--;
-            } else {
-                hi--;
-                low++;
             }
         }
         return max;
