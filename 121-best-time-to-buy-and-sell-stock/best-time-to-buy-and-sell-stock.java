@@ -1,12 +1,12 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        if (prices.length == 0)return 0;
+        
 
 
         int l = 0;
         int r = 1;
 
-        int maxProfit = 0;
+        int maxProfit = 0; // records max profit
 
         while (r < prices.length && l < prices.length) {
             if (prices[l] > prices[r]) { 
