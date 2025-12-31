@@ -1,7 +1,7 @@
 class Solution {
     public int maxProfit(int[] prices) {
         if (prices.length == 0)return 0;
-        if (prices.length == 1)return 0;
+
 
         int l = 0;
         int r = 1;
@@ -9,7 +9,7 @@ class Solution {
         int maxProfit = 0;
 
         while (r < prices.length && l < prices.length) {
-            if (prices[l] > prices[r]) { // 2 < 1
+            if (prices[l] > prices[r]) { 
                 while (prices[l] <= prices[r])r++;
                 l++;
             } else if (prices[l] <= prices[r]) {
