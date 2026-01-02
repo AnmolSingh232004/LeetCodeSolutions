@@ -6,11 +6,11 @@ class Solution {
             pair[i][0] = position[i];
             pair[i][1] = speed[i];
         }
-     Arrays.sort(pair, (a, b) -> Integer.compare(b[0], a[0])); // sorts pair[][] based on pos
+     Arrays.sort(pair, (a, b) -> Integer.compare(a[0], b[0])); // sorts pair[][] based on pos
 
      Stack<Double> stack = new Stack<>(); // speed stack
 
-     for (int i=0; i<n; i++) {
+     for (int i=n-1; i>=0; i--) {
         int posi = pair[i][0];
         int spd = pair[i][1];
         int dist = target - posi; // 2/2 = 1, 4/3 = 1.3
