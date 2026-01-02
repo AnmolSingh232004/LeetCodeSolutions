@@ -8,23 +8,26 @@ class Solution {
         }
      Arrays.sort(pair, (a, b) -> Integer.compare(a[0], b[0])); // sorts pair[][] based on pos
 
-     Stack<Double> stack = new Stack<>(); // speed stack
+     int res = 1;
+     double newMax = 0;
 
      for (int i=n-1; i>=0; i--) {
         int posi = pair[i][0];
         int spd = pair[i][1];
-        int dist = target - posi; // 2/2 = 1, 4/3 = 1.3
-        double currTime = (double) dist / spd; // curr element time left to reach
-
-
-        if (!stack.isEmpty() && currTime > stack.peek()) { // time = 12,3,7,1,1 for sorted pos = [0,3,5,8,10], speed = [1,3,1,4,2], target = 12
-        stack.push(currTime);
+        int dist = target - posi;
+        double currTime = (double) dist / spd; 
+        if (i == n-1) {
+            newMax = currTime;
         }
-        
-        if (stack.isEmpty())stack.push(currTime);
+        if (currTime > newMax) {
+            res++;
+            newMax = currTime;
+        }
+
+
      }
 
-     return stack.size();
+     return res;
      }
     }
 
