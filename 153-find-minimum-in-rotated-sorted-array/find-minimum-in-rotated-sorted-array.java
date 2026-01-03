@@ -20,7 +20,6 @@ class Solution {
             if (nums[mid] <= nums[lo]) {
                 hi = mid - 1;
             } else if (nums[mid] > nums[lo]) { 
-                min = Math.min(min, nums[lo]); // min is either left most element or in the right side
                 lo = mid + 1;
             }
         }
