@@ -9,21 +9,19 @@ class Solution {
         while (lo <= hi) {
             mid = lo + (hi - lo) / 2;
 
-            if (mid+1 < nums.length && nums[mid+1] < nums[mid]) {
-                return nums[mid+1];
+            if (mid+1 < nums.length && nums[mid+1] < nums[mid]) { // every element on right of any element has to be greater if sorted
+                return nums[mid+1]; // mid+1 < mid means it must be smallest value since it breaks the sorted part and only pivot does it
             } 
 
-            if (mid-1 >= 0 && nums[mid-1] > nums[mid]) {
-                return nums[mid];
+            if (mid-1 >= 0 && nums[mid-1] > nums[mid]) { // every element on left must be smaller to curr element
+                return nums[mid]; // this again is the pivot so we return mid element since its smaller than just left to it
             }
 
-            if (nums[mid] <= nums[lo]) {
-                min = Math.min(min, nums[mid]);
-                min = Math.min(min, nums[lo]);
+            if (nums[mid] <= nums[lo]) { // mid can only be smaller than left if there is shifiting there which must mean a bigger value pushed smallest to its right
+                min = Math.min(min, nums[lo]); // make sure to check if lo is smallest yet
                 hi = mid - 1;
-            } else if (nums[mid] > nums[lo]) {
-                min = Math.min(min, nums[mid]);
-                min = Math.min(min, nums[lo]);
+            } else if (nums[mid] > nums[lo]) { // This means either lo is the answer or the answer is in the right side so we check if lo is answer and move to right side
+                min = Math.min(min, nums[lo]); // same thing
                 lo = mid + 1;
             }
         }
