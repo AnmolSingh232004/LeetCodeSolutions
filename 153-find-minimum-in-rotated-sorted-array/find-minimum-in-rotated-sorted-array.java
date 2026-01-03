@@ -4,7 +4,7 @@ class Solution {
         int hi = nums.length-1;
 
         int mid = lo + (hi - lo) / 2;
-        int min = nums[lo]; // if array is normally sorted min is first element
+        int min = nums[0]; // if array is normally sorted min is first element
 
         while (lo <= hi) {
             mid = lo + (hi - lo) / 2;
@@ -24,7 +24,7 @@ class Solution {
                 lo = mid + 1;
             }
         }
-        return min;
+        return nums[0];
     }
 }
 
