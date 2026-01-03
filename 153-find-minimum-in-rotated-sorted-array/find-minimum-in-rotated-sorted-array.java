@@ -9,17 +9,18 @@ class Solution {
         while (lo <= hi) {
             mid = lo + (hi - lo) / 2;
 
-            if (mid+1 < nums.length && nums[mid+1] < nums[mid]) {
-                return nums[mid+1]; 
+            if (mid+1 < nums.length && nums[mid+1] < nums[mid]) { // anamoly
+                return nums[mid+1];
             } 
 
-            if (mid-1 >= 0 && nums[mid-1] > nums[mid]) { 
+            if (mid-1 >= 0 && nums[mid-1] > nums[mid]) { // anamoly
                 return nums[mid];
             }
 
             if (nums[mid] <= nums[lo]) {
                 hi = mid - 1;
             } else if (nums[mid] > nums[lo]) { 
+                min = Math.min(min, nums[lo]); // min is either left most element or in the right side
                 lo = mid + 1;
             }
         }
