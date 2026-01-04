@@ -5,11 +5,9 @@ class Solution {
 
         for (int i=0; i<nums.length; i++) {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+            if (map.get(nums[i]) == count)return nums[i];
         }
 
-        for (Integer key : map.keySet()) {
-            if (map.get(key) == count)return key;
-        }
         return -1;
     }
 }
