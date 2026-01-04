@@ -1,41 +1,37 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int maxPile = 0;
-        for (int i=0; i<piles.length; i++) {
+        int maxPile = 0; // max pile can even be 80553579
+        for (int i = 0; i<piles.length; i++) { // for loop to get max
             maxPile = Math.max(maxPile, piles[i]);
         }
 
-        int lo = 1;
+        int k = 1;
+        int lo = 0;
         int hi = maxPile;
 
-        int res = maxPile;
+        int minSpeedOfKoko = maxPile;
 
-        while (lo <= hi) {
-            int mid = lo + (hi - lo) / 2; // k = mid
-            
-            long totalTimeTaken = 0L;
+        while (lo <= hi) { // k can vary from 1 to maxPileElement
+        int mid = lo + (hi - lo) / 2;
+        double totalTimeTaken = 0;
 
-        for (int i=0; i<piles.length; i++) { // calc if mid is able to eat bannana in time or not
-            long timeTaken = (long) Math.ceil( (double) piles[i] / (double) mid);
+            for (int i=0; i<piles.length; i++) { // calculates time for one/every k
+                double timeTaken = Math.ceil((double) piles[i] / (double) mid);
+                totalTimeTaken += timeTaken;
+            }
 
-            totalTimeTaken += timeTaken;  // 2.2, 0.9, 2.1, 0.3  || 
-        }
-        if (totalTimeTaken > h) { // not enough speed of eating this means we need a bigger value than mid 
-        lo = mid + 1;
-        } else if (totalTimeTaken <= h) { // ate in enough time
-        res = (int) Math.min(res, mid);
-        hi = mid - 1;
-        }
-
-        
+            if (totalTimeTaken <= h) { // if k is bigger than minnium time needed then
+            hi = mid - 1;
+            minSpeedOfKoko = Math.min(minSpeedOfKoko, mid);
+            } else if (totalTimeTaken > h) { // speed too slow of eating
+            lo = mid + 1;
+            }
         }
 
-        return res;
+        return minSpeedOfKoko;
     }
 }
 
-// Input: piles = [25,10,23,4], h = 4
-
-// Output: 25
-
-// [1,2,3,4,5,6,7,8,9,10,11] mid = 6
+// k can be from 1 to piles largest element
+// nums[i] / k = time taken
+// Math.ceil(2.2); -> 3 Rounds off to +ve infinity 
