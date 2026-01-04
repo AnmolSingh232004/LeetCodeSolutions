@@ -8,7 +8,7 @@ class Solution {
             for (int j=1; j<=nums[i]; j++) {
 
                 if (nums[i] % j == 0) {
-                    if (divisorCount > 4)break;
+                    if (divisorCount > 4)break; // This line saved from tle but still trash :( _ _
                     divisorCount++;
                     divisorSum += j;
                 }
