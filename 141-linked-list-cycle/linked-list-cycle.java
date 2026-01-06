@@ -14,7 +14,7 @@ public class Solution {
         ListNode slow = head;
         ListNode fast = head;
 
-        while (fast != null && fast.next != null) {
+        while (fast != null && fast.next != null) { // basically if fast gets nulled at any point so will slow so just check for fast
             fast = fast.next.next;
             slow = slow.next;
             if (slow == fast)return true;
