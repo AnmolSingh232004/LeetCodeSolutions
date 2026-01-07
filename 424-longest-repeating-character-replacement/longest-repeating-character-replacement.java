@@ -1,33 +1,33 @@
 class Solution {
     public int characterReplacement(String s, int k) {
+        
+        int res = 0;
 
-        int maxRes = 0;
-
-        for (char currChar = 'A'; currChar <= 'Z'; currChar++) {
-
+        for (Character currChar = 'A'; currChar<='Z'; currChar++) {
             int lo = 0;
+            int hi = 0;
             int wrongCount = 0;
 
-            for (int hi = 0; hi < s.length(); hi++) {
+            while (hi < s.length()) {
 
-                // 1️⃣ include hi
-                if (s.charAt(hi) != currChar) {
+                if (currChar == s.charAt(hi)) { // normal case if char repeats
+                    hi++;
+                } else if (currChar != s.charAt(hi) && wrongCount <= k) { // <= k because it needs to break then fix later
+                    hi++;
                     wrongCount++;
                 }
 
-                // 2️⃣ fix window
-                while (wrongCount > k) {
-                    if (s.charAt(lo) != currChar) {
-                        wrongCount--;
-                    }
+                while (wrongCount > k && lo <= hi) {
+                    if (s.charAt(lo) != currChar)wrongCount--;
+
                     lo++;
                 }
 
-                // 3️⃣ compute window AFTER fixing
-                int resWinSize = hi - lo + 1;
-                maxRes = Math.max(maxRes, resWinSize);
+                int winSize = hi - lo;
+
+                res = Math.max(winSize, res);
             }
         }
-        return maxRes;
+        return res;
     }
 }
