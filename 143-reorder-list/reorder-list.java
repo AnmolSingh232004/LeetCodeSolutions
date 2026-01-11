@@ -9,36 +9,34 @@
  * }
  */
 class Solution {
-
-
     public void reorderList(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
 
-        while (fast != null && fast.next != null) { // split
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
 
-        ListNode second = reverseList(slow.next); // second half list reverse stored in second 
-        slow.next = null; // splits both 
+        ListNode reversed = reverse(slow.next);
+        slow.next = null;
 
         ListNode first = head;
 
-        while (second != null) {
-            ListNode fNext = first.next;
-            ListNode sNext = second.next;
+        while (reversed != null) {
+            ListNode firstNext = first.next;
+            ListNode reversedNext = reversed.next;
 
-            first.next = second;
-            second.next = fNext;
+            first.next = reversed;
+            reversed.next = firstNext;
 
-            first = fNext;
-            second = sNext;
-
+            first = firstNext;
+            reversed = reversedNext;
         }
+
     }
 
-    public ListNode reverseList(ListNode head) { // reverses a given list
+    public ListNode reverse(ListNode head) {
         ListNode prev = null;
 
         while (head != null) {
@@ -49,4 +47,5 @@ class Solution {
         }
         return prev;
     }
+
 }
