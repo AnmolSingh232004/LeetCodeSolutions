@@ -10,24 +10,20 @@
 
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null)return null;
-        if (p == null || q == null)return null;
-        if (root == p || root == q)return root;
-
-        if (Math.max(p.val, q.val) < root.val)
-        return lowestCommonAncestor(root.left, p, q);
-        else if (Math.min(p.val, q.val) > root.val)
-        return lowestCommonAncestor(root.right, p, q);
-        else
-        return root;
+        if (p == null || q == null || root == null)return null;
+        if (p.val == root.val || q.val == root.val)return root;
+        if (Math.max(p.val, q.val) < root.val) {
+            return lowestCommonAncestor(root.left, p, q);
+        } else if (Math.min(p.val, q.val) > root.val) {
+            return lowestCommonAncestor(root.right, p, q);
+        } else {
+            return root;
+        }
 
     }
 }
 
-// basically we just try to find either p or q on either side
-// we find p or q we return them
-
-// if p or q == root itself at any point we return that
-
-// if the biggest value of both is on left we go left
-// if the smalllest value of bot is on right we go right
+// if p and q are on opposite sides of any node it is the LCA
+// if p and q are on same side we just try to find p or q and the moment we find p and q they are result
+// to check if p and q are on left side which means p and q are smaller than curr node we can check the largest of two if its on left both are on left
+// same for right side if the smallest of both is on right both are on right side
