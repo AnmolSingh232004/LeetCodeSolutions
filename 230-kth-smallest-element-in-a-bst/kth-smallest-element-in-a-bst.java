@@ -26,8 +26,11 @@ class Solution {
         if (root == null)return;
         inOrder(root.left, k);
         node++;
-        
-        if (node == k)ans = root.val;
+
+        if (node == k) {
+            ans = root.val;
+            return;
+        }
 
         inOrder(root.right, k);
     }
