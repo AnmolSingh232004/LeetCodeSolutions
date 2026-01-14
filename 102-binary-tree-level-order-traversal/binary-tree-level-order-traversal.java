@@ -16,34 +16,26 @@
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-
-        while (q.size() != 0) {
-            int size = q.size(); // this is imprt cause then i<queue.size can change
-            List<Integer> localRes = new ArrayList<>();
-            
-
-            for (int i=0; i<size; i++) {
-                TreeNode node = q.poll();
-
-                if (node != null) {
-                localRes.add(node.val);
-                if (node.left != null)q.add(node.left);
-                if (node.right != null)q.add(node.right);
-                }
-            }
-            if (localRes.size() > 0)res.add(localRes);
-        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
         
+        while (queue.size() > 0) {
+           
+            List<Integer> local = new ArrayList<>();
+
+            int limit = queue.size();
+            for (int i=queue.size(); i>0; i--) {
+            TreeNode curr = queue.poll();
+
+            if (curr != null) {
+                local.add(curr.val);
+                queue.add(curr.left);
+                queue.add(curr.right);
+            }
+            }
+            if (local.size() > 0)
+            res.add(local);
+        }
         return res;
     }
-
-    
 }
-
-// we can use a queue, initalizing it first with root
-// for every level we can add every node on each level to queue
-// and then we process these nodes
-// we process a node by adding all nodes.val into our list and IMMEDAITELY REMOVE IT FROM THE QUEUE AND ADD ITS CHILDREN INSTEAD
-// We do this until queue is empty
