@@ -27,3 +27,6 @@ class Solution {
     }
 }
 
+// In this soln what we simply do is, generate all the subsets, and before adding it to our result we just check if it already exsits or not in our res, if it does we skip else we add it.
+
+// We can check this by sorting our potential subset before adding it and checking if it exists or not, this helps because this only depends on frequency of elements
