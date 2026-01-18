@@ -23,3 +23,6 @@ class Solution {
         dfs(nums, i+1, subset);
     }
 }
+
+// At each index, we either include nums[i] or exclude it.
+// When excluding, we skip all consecutive duplicates so the same subset is not generated multiple times at the same recursion depth.
