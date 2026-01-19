@@ -13,7 +13,7 @@ class Solution {
             return;
         }
         
-        if (paren.length() > n* 2|| openCount > n || closeCount > n || closeCount > openCount) {
+        if (openCount > n || closeCount > n || closeCount > openCount) {
             return;
         }
 
@@ -29,5 +29,15 @@ class Solution {
 }
 
 // every call will have option to include ( or )
-// if number of ( becomes less than half of array size means bad combo so return
-//
+// we will keep track of open and close parenthese
+// if at any point either surpasses 'n' which means more than half the elements have ( or ), in that case we return since its bad case 
+// and also techincally ) should never outnumber open therefore if closeCount > openCount that is bad parentheses too
+
+// if opencount == n && clsoecount == n, this means both add upto a valid parentheses since these will have ( always before ) thanks to basecases
+// in this case we add this combo to res
+
+// we add (, increase openCount, then backtrack with it and remove it later
+
+// then we add ), backtrack with it and remove later
+
+// we must ensure we increase open count when adding ( and increase clsoe count when adding )
