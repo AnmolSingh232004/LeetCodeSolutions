@@ -12,7 +12,7 @@ class Solution {
             return;
         }
        
-        if (closeCount > openCount || openCount > n || closeCount > n)return;
+        if (closeCount > openCount || openCount > n)return;
 
         sb.append('(');
         dfs(n, openCount + 1, closeCount, sb);
