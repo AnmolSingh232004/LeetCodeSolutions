@@ -20,22 +20,28 @@ class Solution {
     }
 
     public void backtrack(String digits, int start, StringBuilder sb) {
-          if (sb.length() == digits.length()) {
-                    res.add(new String(sb));
-                    return;
-            }
+        if (sb.length() == digits.length()) {
+            res.add(new String(sb));
+            return;
+        }
 
-            for (int i=0; i<map.get(digits.charAt(start)).size(); i++) {
-                
-                sb.append(map.get(digits.charAt(start)).get(i));
-                backtrack(digits, start+1, sb);
-                sb.deleteCharAt(sb.length() - 1);
-            }
+        // list corresponding to current number
+        List<Character> alphabets = map.get( digits.charAt(start) );
 
-        
+        for (int i=0; i<alphabets.size(); i++) {
+
+            sb.append(alphabets.get(i));
+            backtrack(digits, start+1, sb);
+            sb.deleteCharAt(sb.length() - 1);
+
+        }
 }
 }
 
 // first character will always be from the first digit
 // every character in any combination will only be from its respective digit's position
-// 
+
+// if our stringbuilder reachces length od digits it means a valid combo is found so we store
+// we start a loop which will start from 1st element of the corresponding digits, so for 2 it will be itterate of list of key 2 which is a,b,c
+// and we just backtrack for it 
+// so we for "23", since we start list of 2, we add 'a' to string builder and backtrack for start+1, which then moves to '3' and then we make all possible combos of 'a' for all values in list of '3' which is 'd','e','f', then the backtrack ends then we move onto b for b do same for 'd','e','f'
