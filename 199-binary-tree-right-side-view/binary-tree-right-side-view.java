@@ -15,25 +15,30 @@
  */
 class Solution {
     List<Integer> res = new ArrayList<>();
-
     public List<Integer> rightSideView(TreeNode root) {
-        rightSide(root, 1);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        bfs(root, queue);
         return res;
     }
 
-    public void rightSide(TreeNode root, int lvl) { // lvl = 1 initally, res size = 0 initially
-        if (root == null)return;
+    public void bfs(TreeNode root, Queue<TreeNode> queue) {
 
-        if (lvl > res.size())res.add(root.val);
+        while (!queue.isEmpty()) {
+            int size = queue.size(); // nodes at current level
+
+            for (int i=0; i<size; i++) {
+
+            TreeNode temp = queue.poll();
+
+            if (temp != null) {
+                if (size - i == 1)res.add(temp.val);
+                if (temp.left != null)queue.add(temp.left);
+                if (temp.right != null)queue.add(temp.right);
+            }
+
+            }
             
-        rightSide(root.right, lvl+1);
-        rightSide(root.left, lvl+1);
-            
-
-
+        }
     }
 }
-
-// we just need to add one node for each depth techincally
-// if we can just add the right most node first, then the left node at every level using dfs we can get answer
-// we can use length of list as a measurent of level
