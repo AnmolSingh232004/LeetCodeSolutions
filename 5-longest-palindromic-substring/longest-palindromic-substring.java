@@ -3,10 +3,17 @@ class Solution {
         int lo = 0;
         int hi =0;
         String res = "";
+        Map<int[], String> map = new HashMap<>();
 
         while (lo < s.length() && hi < s.length()) {
             if ( isPalin(s, lo, hi) ) {
-                if (s.substring(lo, hi+1).length() > res.length())res = s.substring(lo, hi+1);
+                if (map.containsKey(new int[]{lo, hi}) && res.length() < map.get(new int[]{lo, hi}).length() )res = s.substring(lo, hi+1);
+
+                else if (s.substring(lo, hi+1).length() > res.length()) {
+                res = s.substring(lo, hi+1);
+                map.put(new int[]{lo, hi}, res);
+                }
+
             }
             if (hi == s.length() - 1) {
                 lo++;
