@@ -7,7 +7,7 @@ class Solution {
 
             // if center is for odd palindromes
             while (lo >= 0 && hi < s.length() && s.charAt(lo) == s.charAt(hi)) {
-                if (res.length() < s.substring(lo, hi+1).length() )res = s.substring(lo, hi+1);
+                if (res.length() < hi - lo +1 )res = s.substring(lo, hi+1);
                 lo--;
                 hi++;
             }
@@ -16,7 +16,7 @@ class Solution {
 
             // if center is even
             while (lo >= 0 && hi < s.length() && s.charAt(lo) == s.charAt(hi)) {
-                if (res.length() < s.substring(lo, hi+1).length() )res = s.substring(lo, hi+1);
+                if (res.length() < hi - lo + 1 )res = s.substring(lo, hi+1);
                 lo--;
                 hi++;
             }
