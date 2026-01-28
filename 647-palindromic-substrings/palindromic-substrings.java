@@ -1,32 +1,34 @@
 class Solution {
     public int countSubstrings(String s) {
         int res = 0;
-        for (int i=0; i<s.length(); i++) {
 
+        for (int i=0; i<s.length(); i++) {
             int lo = i;
             int hi = i;
+            boolean isOdd = false;
 
-            while (hi < s.length() && lo < s.length()) {
-                if ( isPalin(s, lo, hi) ) {
+            while (hi < s.length()) {
+                isOdd = true;
+                if (lo >= 0 && hi < s.length() && s.charAt(hi) == s.charAt(lo)) {
                     res++;
+                    hi++;
+                    lo--;
                 }
-                if (hi == s.length()) {
-                    lo++;
-                    hi = lo;
-                }
-                hi++;
+                else {break;}
             }
-            
+
+            lo = i;
+            hi = i+1;
+
+            while (hi < s.length() && isOdd) {
+                if (lo >= 0 && hi < s.length() && s.charAt(hi) == s.charAt(lo)) {
+                    res++;
+                    hi++;
+                    lo--;
+                }
+                else{break;}
+            }
         }
         return res;
-    }
-
-    public boolean isPalin(String s, int lo, int hi) {
-        while (lo <= hi) {
-            if (s.charAt(lo) != s.charAt(hi))return false;
-            hi--;
-            lo++;
-        }
-        return true;
     }
 }
