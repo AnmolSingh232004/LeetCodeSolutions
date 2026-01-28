@@ -1,29 +1,36 @@
 class Solution {
     public int countSubstrings(String s) {
         int res = 0;
-
+        boolean[][] cache = new boolean[s.length()][s.length()];
         for (int i=0; i<s.length(); i++) {
+
             int lo = i;
             int hi = i;
 
-            while (lo >= 0 && hi < s.length() && s.charAt(hi) == s.charAt(lo)) {
-                res++;
+            while (hi < s.length() && lo < s.length()) {
+                if (cache[lo][hi])res++;
+                else if ( isPalin(s, lo, hi) ) {
+                    cache[lo][hi] = true;
+                    res++;
+                }
+                if (hi == s.length()) {
+                    lo++;
+                    hi = lo;
+                }
                 hi++;
-                lo--;
             }
-            
-            lo = i;
-            hi = i+1;
-            while (lo >= 0 && hi < s.length() && s.charAt(hi) == s.charAt(lo)) {
-                res++;
-                hi++;
-                lo--;
-            }
-
             
         }
         return res;
     }
+
+    public boolean isPalin(String s, int lo, int hi) {
+        while (lo <= hi) {
+            if (s.charAt(lo) != s.charAt(hi))return false;
+            hi--;
+            lo++;
+        }
+        return true;
+    }
 }
 
-// Two pointer approach considering every center to be a valid, palindrome and expanding upon it, this helps by determining if its a valid palindrome while expanding search space itself
