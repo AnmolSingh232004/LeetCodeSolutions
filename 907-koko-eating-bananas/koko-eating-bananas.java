@@ -1,37 +1,51 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        int maxPile = 0; // max pile can even be 80553579
-        for (int i = 0; i<piles.length; i++) { // for loop to get max
-            maxPile = Math.max(maxPile, piles[i]);
+        int largest = 0;
+
+        for (int i=0; i<piles.length; i++) {
+            largest = Math.max(piles[i], largest);
         }
 
-        int k = 1;
-        int lo = 0;
-        int hi = maxPile;
 
-        int minSpeedOfKoko = maxPile;
+        // for (int i=1; i<=largest; i++) {
+        //     long localHours = 0L;
+        //     for (int j=0; j<piles.length; j++) {
+        //         int timeTaken = (int)Math.ceil( (double)piles[j] / (double)i);
+        //         localHours += timeTaken;
+        //         if (localHours <= h && j == piles.length-1)return i;
+        //     }
+        //     if (localHours > h)continue;
+        // }
 
-        while (lo <= hi) { // k can vary from 1 to maxPileElement
-        int mid = lo + (hi - lo) / 2;
-        double totalTimeTaken = 0;
+        int lo = 1;
+        int hi = largest;
 
-            for (int i=0; i<piles.length; i++) { // calculates time for one/every k
-                double timeTaken = Math.ceil((double) piles[i] / (double) mid);
-                totalTimeTaken += timeTaken;
+        int finalAnswer = largest;
+
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2; // current eating speed
+            long localHours = 0L;
+
+            for (int j=0; j<piles.length; j++) {
+                int timeTaken = (int)Math.ceil( (double)piles[j] / (double)mid); // find time taken
+                localHours += timeTaken; // add time taken
             }
 
-            if (totalTimeTaken <= h) { // if k is bigger than minnium time needed then
-            hi = mid - 1;
-            minSpeedOfKoko = Math.min(minSpeedOfKoko, mid);
-            } else if (totalTimeTaken > h) { // speed too slow of eating
-            lo = mid + 1;
+            if (localHours <= h) {
+                hi = mid - 1;
+                finalAnswer = Math.min(finalAnswer, mid);
+            } else {
+                lo = mid + 1;
             }
+            
         }
 
-        return minSpeedOfKoko;
+        return finalAnswer;
     }
 }
 
-// k can be from 1 to piles largest element
-// nums[i] / k = time taken
-// Math.ceil(2.2); -> 3 Rounds off to +ve infinity 
+// k can be from 1 to piles[largest]
+// if hours are excedded we fail
+// we test frin 1 to h and we simulate koko eating banana by assesing how many bananas koka eat and time taken
+// piles[i] / k = time taken in hours
+// 
