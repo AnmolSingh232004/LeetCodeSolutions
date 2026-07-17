@@ -1,27 +1,21 @@
 class Solution {
     List<List<Integer>> res = new ArrayList<>();
-
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<Integer> list = new ArrayList<>();
-
-        dfs(candidates, 0, target, list);
+        dfs(candidates, target, 0, new ArrayList<>());
         return res;
     }
 
-    public void dfs(int[] nums, int i, int target, List<Integer> list) {
-        if (i == nums.length || target < 0) {
-            return;
-        }
-
+    public void dfs(int[] cand, int target, int i, List<Integer> comb) {
+        if (target < 0 || i >= cand.length)return;
         if (target == 0) {
-            res.add(new ArrayList<>(list));
+            res.add(new ArrayList<>(comb));
             return;
         }
 
-        list.add(nums[i]);
-        dfs(nums, i, target - nums[i], list); // this just says include nums[i] again and again for one branch
-        list.remove(list.size() - 1);
-        dfs(nums, i+1, target, list); // this says for one branch ignore i forever and since we ignore i dont change target
+        comb.add(cand[i]);
+        dfs(cand, target - cand[i], i, comb);
 
+        comb.remove(comb.size() - 1);
+        dfs(cand, target, i+1, comb);
     }
 }
