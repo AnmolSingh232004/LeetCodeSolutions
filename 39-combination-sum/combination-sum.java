@@ -1,21 +1,21 @@
 class Solution {
     List<List<Integer>> res = new ArrayList<>();
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        dfs(candidates, target, 0, new ArrayList<>());
+        dfs(candidates, target, 0, new ArrayList<>(), 0);
         return res;
     }
 
-    public void dfs(int[] cand, int target, int i, List<Integer> comb) {
-        if (target < 0 || i >= cand.length)return;
-        if (target == 0) {
+    public void dfs(int[] cand, int target, int i, List<Integer> comb, int sum) {
+        if (sum > target || i >= cand.length)return;
+        if (sum == target) {
             res.add(new ArrayList<>(comb));
             return;
         }
 
         comb.add(cand[i]);
-        dfs(cand, target - cand[i], i, comb);
+        dfs(cand, target, i, comb, sum+cand[i]);
 
         comb.remove(comb.size() - 1);
-        dfs(cand, target, i+1, comb);
+        dfs(cand, target, i+1, comb, sum);
     }
 }
